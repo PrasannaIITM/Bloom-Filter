@@ -55,8 +55,9 @@ class BloomFilter(object):
     def generateStats(self):
         """
 		Calculates the statistics of a filter
-		Probability of False Positives, predicted false positive rate, n, m, k, .
-		"""
+		Probability of False Positives, predicted false positive rate, n, m, k.
+        """
+
         n = float(self.n)
         m = float(self.m)
         k = float(self.k)
