@@ -6,7 +6,7 @@ class BloomFilter(object):
     def __init__(self, m, k):
         self.m = m # size of bloom filter
         self.k = k # number of hash functions
-        self.n = 0 # total count of the elemnts inserted in the set, intialized to zero, if this is incremented on add, this will be length of the filter, given elements are not removed
+        self.n = 0 # total count of the elemnts inserted in the set
         self.bloomFilter = [0 for i in range(self.m)]
         
     def _setAllBitsToZero(self):
@@ -18,7 +18,8 @@ class BloomFilter(object):
         """
 		hashes the key for k defined,
 		returns a list of the indexes which have to be set
-		"""
+        """
+
         indexList = []
         for i in range(1, self.k + 1):
             indexList.append((hash(item) + i * mmh3.hash(item)) % self.m)
@@ -27,7 +28,7 @@ class BloomFilter(object):
     def add(self, item):
         """
 		Insert an item in the filter
-		"""
+        """
         
         for i in self.getBitArrayIndices(item):
             self.bloomFilter[i] = 1
@@ -37,7 +38,8 @@ class BloomFilter(object):
     def contains(self, key):
         """
 		returns whether item exists in the set or not
-		"""
+        """
+
         for i in self.getBitArrayIndices(key):
             if self.bloomFilter[i] != 1:
                 return False
@@ -46,7 +48,8 @@ class BloomFilter(object):
     def length(self):
         """
 		returns the current size of the filter
-		"""
+        """
+
         return self.n
         
     def generateStats(self):
@@ -69,5 +72,6 @@ class BloomFilter(object):
     def reset(self):
         """
 		Resets the filter and clears old values and statistics
-		"""
+        """
+
         self._setAllBitsToZero()
